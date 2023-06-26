@@ -18,7 +18,7 @@ const usersRoute = require("./routes/users");
 const productsRoute = require("./routes/products");
 
 //DB connection
-connect(`${process.env.MONGO_DB}`)
+connect(`${process.env.MONGO_DB}`, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("DB Connected!!"))
   .catch((error) => console.log(error));
 

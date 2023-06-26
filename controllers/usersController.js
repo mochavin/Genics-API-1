@@ -33,17 +33,20 @@ const saveUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
+  const userId = req.params.id;
+  const user = req.body;
   try{
-    const user = await User.findById(req.params.id);
-    if(!user){
-      return res.status(404).json({
-        message: 'User not found',
-        data: {},
-      });
-    }
-    user.name = req.body.name;
-    user.age = req.body.age;
-    const updatedUser = await user.save();
+  // const user = await User.findById(req.params.id);
+    // if(!user){
+    //   return res.status(404).json({
+    //     message: 'User not found',
+    //     data: {},
+    //   });
+    // }
+    const updatedUser = await User.findByIdAndUpdate(userId, user, {
+      new: true,
+    });
+
     return res.status(200).json({
       message: 'User updated successfully',
       data: updatedUser,
